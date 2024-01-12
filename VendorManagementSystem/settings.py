@@ -124,7 +124,7 @@ REST_FRAMEWORK = {
 }
 
 CRONJOBS = [
-    ('*/12 * * * *', 'Metrics.cron.my_cron_job')
+    ('* */12 * * *', 'Metrics.cron.my_cron_job')
 ]
 
 # Password validation

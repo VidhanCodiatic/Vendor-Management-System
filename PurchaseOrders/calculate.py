@@ -3,25 +3,32 @@ from django.db.models import Count, F, Sum
 
 from PurchaseOrders.models import PurchaseOrder
 
-# def calculate_quality_rating_avg(vendor):
-#     completed_orders = PurchaseOrder.objects.filter(vendor=vendor, status='completed').exclude(quality_rating=None)
-#     quality_rating_avg = completed_orders.aggregate(Avg('quality_rating'))['quality_rating__avg'] or 0.0
-#     vendor.quality_rating_avg = quality_rating_avg
-#     vendor.save()
-
-
-# optimization date  
 
 def calculate_on_time_delivery_rate(vendor):
     ven_id = vendor
-    # vendor = Vendor.objects.get(id=vendor)
-    total_completed_pos = PurchaseOrder.objects.filter(
-        vendor=ven_id, status='completed').count()
-
-    on_time_deliveries = PurchaseOrder.objects.filter(
-        vendor=ven_id, status='completed', delivery_date__lte=F('acknowledgment_date')).count()
     
+    purchase_order =  PurchaseOrder.objects.filter(
+        vendor=ven_id, status='completed')
+    
+    total_completed_pos = purchase_order.count()
+    on_time_deliveries = purchase_order.filter(delivery_date__lte=F('acknowledgment_date')).count()
     return on_time_deliveries / total_completed_pos if total_completed_pos > 0 else 0.0
+
+
+
+
+
+# def calculate_on_time_delivery_rate(vendor):
+#     ven_id = vendor
+#     # vendor = Vendor.objects.get(id=vendor)
+    
+#     total_completed_pos = PurchaseOrder.objects.filter(
+#         vendor=ven_id, status='completed').count()
+
+#     on_time_deliveries = PurchaseOrder.objects.filter(
+#         vendor=ven_id, status='completed', delivery_date__lte=F('acknowledgment_date')).count()
+    
+#     return on_time_deliveries / total_completed_pos if total_completed_pos > 0 else 0.0
 
 
 def calculate_quality_rating_avg(vendor):
@@ -52,21 +59,17 @@ def calculate_average_response_time(vendor):
         for po in pos_with_acknowledgment
     ) if pos_with_acknowledgment else 0.0
 
-    print(total_response_time / len(pos_with_acknowledgment) if len(pos_with_acknowledgment) > 0 else 0.0)
-
     return total_response_time / len(pos_with_acknowledgment) if len(pos_with_acknowledgment) > 0 else 0.0
 
 def calculate_fulfillment_rate(vendor):
     ven_id = vendor
-    total_pos = PurchaseOrder.objects.filter(
-        vendor = ven_id
-    ).count()
 
-    fulfilled_pos = PurchaseOrder.objects.filter(
-        vendor = ven_id,
-        status = 'completed',
-        quality_rating__gt=0  # Assuming only successful ones are considered
-    ).count()
+    purchase_order =  PurchaseOrder.objects.filter(
+        vendor=ven_id, status='completed')
+    
+    total_pos = purchase_order.count()
+
+    fulfilled_pos = purchase_order.filter(quality_rating__gt=0).count()
 
     return fulfilled_pos / total_pos if total_pos > 0 else 0.0
 
@@ -124,3 +127,14 @@ def calculate_fulfillment_rate(vendor):
 # return round(result.get("avg_response_time").total_seconds(), 2)
 # except ZeroDivisionError:
 # return 0
+
+
+
+# def calculate_quality_rating_avg(vendor):
+#     completed_orders = PurchaseOrder.objects.filter(vendor=vendor, status='completed').exclude(quality_rating=None)
+#     quality_rating_avg = completed_orders.aggregate(Avg('quality_rating'))['quality_rating__avg'] or 0.0
+#     vendor.quality_rating_avg = quality_rating_avg
+#     vendor.save()
+
+
+# optimization date 
