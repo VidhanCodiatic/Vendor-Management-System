@@ -1,6 +1,8 @@
 
 from django.contrib import admin
+
 from PurchaseOrders.models import PurchaseOrder
+
 
 @admin.register(PurchaseOrder)
 class PurchaseOrderAdmin(admin.ModelAdmin):

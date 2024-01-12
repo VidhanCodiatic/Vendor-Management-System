@@ -1,6 +1,8 @@
 
 from django.contrib import admin
+
 from Metrics.models import HistoricalPerformance
+
 
 @admin.register(HistoricalPerformance)
 class HistoricalPerformanceAdmin(admin.ModelAdmin):

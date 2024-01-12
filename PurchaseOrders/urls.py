@@ -7,6 +7,5 @@ orderRouter = DefaultRouter()
 orderRouter.register('purchase_orders', PurchaseOrderModelViewSet, basename='purchase_orders')
 
 urlpatterns = [
-    # path('api-auth/', include('rest_framework.urls')), # for user's login and logout
-    path('', include(orderRouter.urls)), #for userRouter urls
+    path('', include(orderRouter.urls)),
 ]

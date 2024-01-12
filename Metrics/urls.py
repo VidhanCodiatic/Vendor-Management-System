@@ -1,7 +1,7 @@
 from django.urls import path
-from Metrics.views import VendorHistoricalPerformanceView
+
+from Metrics.views import VendorPerformanceView
 
 urlpatterns = [
-    path('historical_performance/', VendorHistoricalPerformanceView.as_view(),
-        name='vendor-historical-performance'),
+    path('vendors/<int:vendor_id>/performance/',  VendorPerformanceView.as_view(), name='vendor-historical-performance'),
 ]

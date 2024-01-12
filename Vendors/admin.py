@@ -1,6 +1,8 @@
 
 from django.contrib import admin
+
 from Vendors.models import Vendor
+
 
 @admin.register(Vendor)
 class VendorAdmin(admin.ModelAdmin):

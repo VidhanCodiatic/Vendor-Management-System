@@ -1,18 +1,17 @@
 
-from Vendors.models import Vendor
-from Vendors.serializers import VendorSerializer, UserSerializer
-from rest_framework import viewsets
 from django.contrib.auth.models import User
+from rest_framework import status, viewsets, generics
 from rest_framework.response import Response
-from rest_framework import status
-from Vendors.permissions import UserPermission
 
+from Vendors.models import Vendor
+from Vendors.permissions import VendorPermission
+from Vendors.serializers import UserSerializer, VendorSerializer
 
 
 class VendorModelViewSet(viewsets.ModelViewSet):
     queryset = Vendor.objects.all()
     serializer_class = VendorSerializer
-    permission_classes = [UserPermission]
+    permission_classes = [VendorPermission]
 
     def create(self, request, *args, **kwargs):
         user = self.request.user
@@ -29,9 +28,6 @@ class VendorModelViewSet(viewsets.ModelViewSet):
             except Exception as e:
                 return Response({'error' : str(e)})
         
-class UserModelViewSet(viewsets.ModelViewSet):
+class UserAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [UserPermission]
-
-

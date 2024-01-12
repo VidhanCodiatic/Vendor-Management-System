@@ -1,8 +1,11 @@
+import random
+
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.utils.text import slugify
+
 from Vendors.models import Vendor
-import random
+
 
 @receiver(pre_save, sender=Vendor)
 def generate_vendor_code(sender, instance, *args, **kwargs):

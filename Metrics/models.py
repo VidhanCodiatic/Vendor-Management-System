@@ -2,6 +2,7 @@
 from django.db import models
 from Vendors.models import Vendor
 
+
 class HistoricalPerformance(models.Model):
     '''
     This model optionally stores historical data on vendor performance, enabling trend analysis

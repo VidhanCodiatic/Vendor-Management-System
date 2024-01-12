@@ -1,15 +1,17 @@
 
-from PurchaseOrders.models import PurchaseOrder
-from Vendors.models import Vendor
-from PurchaseOrders.serializers import PurchaseOrderSerializer
-from rest_framework import viewsets
+from rest_framework import status, viewsets
 from rest_framework.response import Response
-from rest_framework import status
-        
+from Vendors.models import Vendor
+
+from PurchaseOrders.models import PurchaseOrder
+from PurchaseOrders.permissions import PurchaseOrderPermission
+from PurchaseOrders.serializers import PurchaseOrderSerializer
+
 
 class PurchaseOrderModelViewSet(viewsets.ModelViewSet):
     queryset = PurchaseOrder.objects.all()
     serializer_class = PurchaseOrderSerializer
+    permission_classes = [PurchaseOrderPermission]
 
     def perform_create(self, serializer):
         user = self.request.user

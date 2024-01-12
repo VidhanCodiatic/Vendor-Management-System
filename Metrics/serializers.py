@@ -1,8 +1,10 @@
 
 from rest_framework import serializers
+
 from Metrics.models import HistoricalPerformance
 
-class HistoricalPerformanceSerializer(serializers.HyperlinkedModelSerializer):
+
+class HistoricalPerformanceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = HistoricalPerformance
