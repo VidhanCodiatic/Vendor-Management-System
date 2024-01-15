@@ -11,6 +11,21 @@ A Vendor Management System(VMS) apis  for efficient vendor profile management, p
 - [Installation](#installation)
 - [API Endpoints](#api-endpoints)
 
+## Core Features
+
+1. **Vendor Profile Management:**
+
+   - Create, retrieve, update, and delete vendor profiles.
+   - Track vendor information including name, contact details, address, and a unique vendor code.
+2. **Purchase Order Tracking:**
+
+   - Create, retrieve, update, and delete purchase orders.
+   - Track purchase order details such as PO number, vendor reference, order date, items, quantity, and status.
+3. **Vendor Performance Evaluation:**
+
+   - Calculate vendor performance metrics, including on-time delivery rate, quality rating average, average response time, and fulfillment rate.
+   - Retrieve performance metrics for a specific vendor.
+
 ## Installation
 
 1. Clone the repository:
