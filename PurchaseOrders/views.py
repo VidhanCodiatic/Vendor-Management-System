@@ -24,7 +24,7 @@ class PurchaseOrderModelViewSet(viewsets.ModelViewSet):
             return response
 
         except Vendor.DoesNotExist:
-            return Response({'error': 'Vendor not found for the current user.'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'error': 'Vendor not found for the current user.'})
 
         except Exception as e:
-            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)})
